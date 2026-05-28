@@ -182,10 +182,8 @@
 <body>
 
 <div class="hero">
-  <div class="tag">💬 ディスカッション用ドラフト</div>
-  <h1>サポートヘルプの方向性、これで進めて良さそうですか？</h1>
-  <p>顧客の問い合わせを減らすために、管理サイトに「ヘルプページ」を作りたいと考えています。<br>AIと整理してみた大枠を共有するので、方向性についてご意見いただけると嬉しいです。</p>
-  <div class="cta-box">📝 詳しい実装はエンジニアにお任せ／<strong>全体の枠組み</strong>を確認したいです</div>
+  <h1>FAQ & Manual の構築・更新の仕組み相談</h1>
+  <p>Markdownで書いて、Gitで管理して、自動で /help に公開。</p>
 </div>
 
 <div class="container">
@@ -198,7 +196,7 @@
 
   <!-- 1. 全体イメージ -->
   <div class="section">
-    <div class="section-title">📡 全体イメージ <span class="ask">これで合っていそう？</span></div>
+    <div class="section-title">📡 全体イメージ</div>
     <div class="section-sub">コンテンツをCSが書いて、自動で管理サイトに公開される流れ</div>
     <div style="background:white;border-radius:20px;padding:30px;box-shadow:0 4px 16px rgba(0,0,0,0.07);">
       <div class="flow">
@@ -224,7 +222,7 @@
 
   <!-- 2. ユーザーが見る画面 -->
   <div class="section">
-    <div class="section-title">🎨 顧客が見る画面のイメージ <span class="ask">UXの方向性として違和感ない？</span></div>
+    <div class="section-title">🎨 顧客が見る画面のイメージ</div>
     <div class="section-sub">あくまでイメージ図。実際のデザインはエンジニア／デザイナーと作り込みます</div>
 
     <p style="font-size:13px;color:#4F46E5;font-weight:700;margin-bottom:8px;">▼ ヘルプのトップ画面</p>
@@ -260,7 +258,7 @@
 
   <!-- 3. FAQ と Manual の中身 -->
   <div class="section">
-    <div class="section-title">📋 FAQ と Manual の中身 <span class="ask">この2種類で十分？</span></div>
+    <div class="section-title">📋 FAQ と Manual の中身</div>
     <div class="section-sub">2つのテンプレートに沿って執筆する想定です</div>
     <div class="template-grid">
       <div class="tpl-card">
@@ -285,7 +283,7 @@
 
   <!-- 4. ？アイコン -->
   <div class="section">
-    <div class="section-title">❓ 各画面からヘルプへ飛べるようにしたい <span class="ask">配置イメージは妥当？</span></div>
+    <div class="section-title">❓ 各画面からヘルプへ飛べるようにしたい</div>
     <div class="section-sub">管理サイト内の各機能画面に「？」ボタンを置いて、迷ったときすぐ該当ヘルプに飛べる</div>
     <div class="context-mockup">
       <div class="mockup-bar"><span>🚌 配車設定</span><span class="q-badge">?</span></div>
@@ -303,7 +301,7 @@
 
   <!-- 5. CSの運用 -->
   <div class="section">
-    <div class="section-title">✏️ CSの運用イメージ <span class="ask">この負荷感で続けられそう？</span></div>
+    <div class="section-title">✏️ CSの運用イメージ</div>
     <div class="section-sub">原稿を書いて保存場所に置くだけ。CMSの操作習得は不要</div>
     <div class="ops-steps">
       <div class="step"><div class="step-num">1</div><div class="step-content"><div class="title">テンプレートに沿って原稿を書く</div><div class="desc">「質問・答え・詳細・関連」の枠を埋めるイメージ。スクショは画像フォルダに置く。</div></div></div>
@@ -315,7 +313,7 @@
 
   <!-- 6. スコープ -->
   <div class="section">
-    <div class="section-title">🎯 やること／やらないこと <span class="ask">スコープこれで合ってる？</span></div>
+    <div class="section-title">🎯 やること／やらないこと</div>
     <div class="section-sub">Phase 2（最初のリリース）の範囲。AI Bot等は来期検討</div>
     <div class="scope-grid">
       <div class="scope-card do">
@@ -343,7 +341,7 @@
 
   <!-- 7. 計測 -->
   <div class="section">
-    <div class="section-title">📊 計測したいこと <span class="ask">この4つで足りる？</span></div>
+    <div class="section-title">📊 計測したいこと</div>
     <div class="section-sub">効果検証と改善優先順位づけに使うデータ</div>
     <div class="kpi-grid">
       <div class="kpi-card"><div class="kpi-icon">👁️</div><div class="kpi-label">ページ閲覧数</div><div class="kpi-note">どのFAQが読まれているか</div></div>
@@ -399,9 +397,6 @@
         <div class="sp"><div class="sp-icon">🎯</div><div class="sp-title">問い合わせを減らす</div><div class="sp-desc">顧客が自己解決できる /help を Phase 2 で立ち上げ</div></div>
         <div class="sp"><div class="sp-icon">📝</div><div class="sp-title">CSが書いて自動公開</div><div class="sp-desc">CMSなし。テンプレに沿って書くだけで運用が回る</div></div>
         <div class="sp"><div class="sp-icon">📊</div><div class="sp-title">データで改善し続ける</div><div class="sp-desc">閲覧・検索・解決率を見て、月次でコンテンツ強化</div></div>
-      </div>
-      <div style="margin-top:24px;padding:16px;background:rgba(255,255,255,0.15);border-radius:12px;font-size:14px;text-align:center;">
-        💬 この方向性で進めて良さそうか、お気軽にコメントください
       </div>
     </div>
   </div>
