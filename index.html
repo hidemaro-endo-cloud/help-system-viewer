@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow">
+  <title>FAQ & Manual 構築・更新の仕組み</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
+      background: #F0F4FF;
+      color: #1E293B;
+      line-height: 1.6;
+    }
+    .hero {
+      background: linear-gradient(135deg, #4F46E5 0%, #06B6D4 100%);
+      color: white;
+      padding: 48px 24px;
+      text-align: center;
+    }
+    .hero .tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 4px 16px;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+    .hero h1 { font-size: clamp(20px, 4vw, 34px); font-weight: 700; margin-bottom: 12px; }
+    .hero p { font-size: 15px; opacity: 0.9; max-width: 580px; margin: 0 auto; }
+    .container { max-width: 960px; margin: 0 auto; padding: 40px 20px; }
+    .section { margin-bottom: 48px; }
+    .section-title {
+      font-size: 19px; font-weight: 700; color: #4F46E5;
+      margin-bottom: 20px; padding-bottom: 8px;
+      border-bottom: 3px solid #4F46E5;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .flow { display: flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: 0; }
+    .flow-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .flow-box {
+      background: white; border-radius: 14px; padding: 18px 20px; text-align: center;
+      box-shadow: 0 4px 16px rgba(79,70,229,0.1);
+      min-width: 128px; max-width: 148px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .flow-box:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(79,70,229,0.2); }
+    .flow-box .icon { font-size: 30px; margin-bottom: 8px; display: block; }
+    .flow-box .label { font-size: 13px; font-weight: 700; color: #1E293B; }
+    .flow-box .sublabel { font-size: 11px; color: #64748B; margin-top: 4px; }
+    .flow-box.blue  { border-top: 4px solid #4F46E5; }
+    .flow-box.cyan  { border-top: 4px solid #06B6D4; }
+    .flow-box.amber { border-top: 4px solid #F59E0B; }
+    .flow-box.green { border-top: 4px solid #10B981; }
+    .flow-box.purple{ border-top: 4px solid #8B5CF6; }
+    .arrow { font-size: 22px; color: #94A3B8; padding: 0 6px; flex-shrink: 0; }
+    .arrow-label { font-size: 11px; color: #64748B; text-align: center; max-width: 76px; }
+    .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .comp-card { background: white; border-radius: 16px; padding: 22px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+    .comp-card.faq { border-left: 6px solid #4F46E5; }
+    .comp-card.manual { border-left: 6px solid #06B6D4; }
+    .comp-title { font-size: 17px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+    .comp-title.faq { color: #4F46E5; }
+    .comp-title.manual { color: #06B6D4; }
+    .comp-item { display: flex; gap: 10px; margin-bottom: 9px; font-size: 13px; }
+    .comp-item .dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+    .faq .dot { background: #4F46E5; }
+    .manual .dot { background: #06B6D4; }
+    .url-path {
+      background: #1E293B; color: #A5F3FC; padding: 5px 12px;
+      border-radius: 7px; font-family: 'Courier New', monospace; font-size: 11px;
+      margin-top: 10px; display: inline-block;
+    }
+    .update-steps { display: flex; flex-direction: column; gap: 14px; }
+    .step {
+      display: flex; align-items: flex-start; gap: 16px;
+      background: white; border-radius: 12px; padding: 16px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .step-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, #4F46E5, #06B6D4);
+      color: white; font-size: 14px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .step-content .title { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+    .step-content .desc { font-size: 13px; color: #64748B; }
+    .screen-mockup { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+    .mockup-bar {
+      background: #F1F5F9; border-radius: 8px; padding: 10px 16px; font-size: 13px;
+      font-weight: 700; color: #475569; display: flex; align-items: center;
+      justify-content: space-between; margin-bottom: 16px;
+    }
+    .q-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 24px; height: 24px; background: #4F46E5; color: white;
+      border-radius: 50%; font-size: 13px; font-weight: 700;
+      cursor: pointer; transition: transform 0.2s;
+      animation: pulse 2s infinite;
+    }
+    .q-badge:hover { transform: scale(1.2); animation: none; }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(79,70,229,0.4); }
+      50%      { box-shadow: 0 0 0 7px rgba(79,70,229,0); }
+    }
+    .tooltip-demo { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 18px; }
+    .help-popup {
+      background: #4F46E5; color: white; padding: 12px 16px; border-radius: 12px;
+      font-size: 13px; position: relative; max-width: 230px;
+    }
+    .help-popup::before {
+      content: ''; position: absolute; left: -10px; top: 50%; transform: translateY(-50%);
+      border: 6px solid transparent; border-right-color: #4F46E5;
+    }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 16px; }
+    .kpi-card {
+      background: white; border-radius: 12px; padding: 18px; text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-bottom: 4px solid #4F46E5;
+    }
+    .kpi-card .kpi-icon  { font-size: 28px; margin-bottom: 8px; }
+    .kpi-card .kpi-label { font-size: 13px; font-weight: 700; }
+    .kpi-card .kpi-note  { font-size: 11px; color: #64748B; margin-top: 4px; }
+    .summary-card { background: linear-gradient(135deg,#4F46E5 0%,#06B6D4 100%); color:white; border-radius:20px; padding:32px; }
+    .summary-points { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:18px; margin-top:18px; }
+    .sp { background:rgba(255,255,255,0.15); border-radius:12px; padding:16px; }
+    .sp .sp-icon  { font-size:24px; margin-bottom:8px; }
+    .sp .sp-title { font-weight:700; font-size:14px; margin-bottom:4px; }
+    .sp .sp-desc  { font-size:12px; opacity:0.88; }
+    @media(max-width:600px){
+      .flow { flex-direction:column; }
+      .arrow { transform:rotate(90deg); }
+      .comparison { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="tag">🛠️ BusCatch サポートナレッジ</div>
+  <h1>FAQ & Manual の構築・更新の仕組み</h1>
+  <p>Markdownで書いて、Gitで管理して、自動でヘルプページへ。CS担当が知っておくべきシステム全体像。</p>
+</div>
+
+<div class="container">
+
+  <div class="section">
+    <div class="section-title">📡 全体フロー：コンテンツはこうして届く</div>
+    <div style="background:white;border-radius:20px;padding:32px;box-shadow:0 4px 16px rgba(0,0,0,0.07);">
+      <div class="flow">
+        <div class="flow-item">
+          <div class="flow-box blue">
+            <span class="icon">✏️</span>
+            <div class="label">CS担当が<br>Markdown作成</div>
+            <div class="sublabel">船井さん・遠藤が執筆</div>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="arrow">→</div>
+          <div class="arrow-label">git push</div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-box cyan">
+            <span class="icon">🐙</span>
+            <div class="label">GitHub<br>リポジトリ</div>
+            <div class="sublabel">support-knowledge</div>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="arrow">→</div>
+          <div class="arrow-label">自動ビルド</div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-box amber">
+            <span class="icon">⚙️</span>
+            <div class="label">CI/CD<br>変換処理</div>
+            <div class="sublabel">MD→HTML＋索引生成</div>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="arrow">→</div>
+          <div class="arrow-label">デプロイ</div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-box green">
+            <span class="icon">🖥️</span>
+            <div class="label">管理サイト<br>/help</div>
+            <div class="sublabel">顧客が閲覧</div>
+          </div>
+        </div>
+        <div class="flow-item">
+          <div class="arrow">→</div>
+          <div class="arrow-label">深リンク</div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-box purple">
+            <span class="icon">❓</span>
+            <div class="label">各機能画面の<br>？アイコン</div>
+            <div class="sublabel">文脈に合うヘルプへ</div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:22px;padding:14px;background:#F0F4FF;border-radius:10px;font-size:13px;color:#475569;">
+        💡 <strong>ポイント</strong>：CSがMarkdownを書いてGitにpushするだけ。変換・公開は自動。CMSへのログインもサーバー操作も不要。
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">📚 FAQ と Manual の違い</div>
+    <div class="comparison">
+      <div class="comp-card faq">
+        <div class="comp-title faq">❓ FAQ（よくある質問）</div>
+        <div class="comp-item"><div class="dot"></div><div>「GPSが取得できない」など<strong>困りごとベース</strong></div></div>
+        <div class="comp-item"><div class="dot"></div><div>問題 → 原因 → 解決策の構成</div></div>
+        <div class="comp-item"><div class="dot"></div><div>末尾に「解決した / しなかった」ボタン</div></div>
+        <div class="comp-item"><div class="dot"></div><div>検索・タグフィルターで探す</div></div>
+        <div class="url-path">/help/faq/配車アプリ/gps-not-found</div>
+      </div>
+      <div class="comp-card manual">
+        <div class="comp-title manual">📖 Manual（操作手順書）</div>
+        <div class="comp-item"><div class="dot"></div><div>「配車アプリの初期設定」など<strong>手順ベース</strong></div></div>
+        <div class="comp-item"><div class="dot"></div><div>ステップ番号付きの順序立てた説明</div></div>
+        <div class="comp-item"><div class="dot"></div><div>画像・スクリーンショット付き</div></div>
+        <div class="comp-item"><div class="dot"></div><div>機能名タグで分類される</div></div>
+        <div class="url-path">/help/manual/配車アプリ/initial-setup</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🔄 コンテンツを追加・修正するとき</div>
+    <div class="update-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="title">✏️ Markdownファイルを作る・編集する</div>
+          <div class="desc">ファイル先頭に「タイトル・タグ・機能名」などフロントマター（メタ情報）を書く。本文はMarkdown形式。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="title">🐙 GitHubにpushする</div>
+          <div class="desc">support-knowledgeリポジトリのmainブランチにpush。レビューが必要な場合はプルリクエストを出す。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="title">⚙️ GitHub Actionsが自動で動く</div>
+          <div class="desc">MarkdownをHTMLに変換 + 検索インデックスを再生成。手動操作は一切不要。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="title">🖥️ 管理サイトに反映される</div>
+          <div class="desc">ビルド完了後、/help ページに新コンテンツが公開される（反映タイミングはエンジニアと要確認）。</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="title">📊 計測データを確認して改善する</div>
+          <div class="desc">閲覧数・検索ワード・「解決した/しなかった」率を月次でチェック。優先度の高いFAQから改善する。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">❓ コンテキストヘルプ（？アイコン）の仕組み</div>
+    <div class="screen-mockup">
+      <p style="font-size:13px;color:#64748B;margin-bottom:16px;">管理サイトの各機能画面に <strong>？ボタン</strong> を配置。押すと該当FAQへ直接ジャンプする。</p>
+      <div class="mockup-bar">
+        <span>🚌 配車設定</span>
+        <span class="q-badge">?</span>
+      </div>
+      <div style="background:#F8FAFC;border-radius:8px;padding:12px;font-size:13px;color:#94A3B8;margin-bottom:4px;">
+        [配車設定の入力フォーム...]
+      </div>
+      <div class="tooltip-demo">
+        <div style="font-size:13px;color:#475569;">？を押すと…</div>
+        <div style="font-size:24px;color:#F59E0B;">→</div>
+        <div class="help-popup">
+          📌 <strong>配車設定のヘルプ</strong><br>
+          <span style="opacity:0.85;font-size:12px;">/help/faq/配車設定 へジャンプ</span>
+        </div>
+      </div>
+      <div style="margin-top:20px;padding:13px;background:#FFF7ED;border-radius:10px;font-size:13px;color:#92400E;border-left:4px solid #F59E0B;">
+        ⚠️ どの画面にどのFAQを紐付けるかは、船井さんへのヒアリング結果をもとに決定予定
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">📊 計測する4つの指標</div>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-icon">👁️</div>
+        <div class="kpi-label">ページ閲覧数<br>（PV/UU）</div>
+        <div class="kpi-note">どのFAQが読まれているか</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-icon">🔍</div>
+        <div class="kpi-label">検索ワード</div>
+        <div class="kpi-note">顧客が何を探しているか</div>
+      </div>
+      <div class="kpi-card" style="border-bottom-color:#10B981;">
+        <div class="kpi-icon">✅</div>
+        <div class="kpi-label">「解決した」率</div>
+        <div class="kpi-note">目標 50% 以上</div>
+      </div>
+      <div class="kpi-card" style="border-bottom-color:#F59E0B;">
+        <div class="kpi-icon">🔗</div>
+        <div class="kpi-label">流入元</div>
+        <div class="kpi-note">？アイコン経由 vs 直接</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="summary-card">
+      <div style="font-size:19px;font-weight:700;margin-bottom:6px;">📌 まとめ：覚えておく3つのポイント</div>
+      <div class="summary-points">
+        <div class="sp">
+          <div class="sp-icon">📝</div>
+          <div class="sp-title">Markdownで書く</div>
+          <div class="sp-desc">HTMLやCMSの知識は不要。Markdownファイルを書いてGitにpushするだけ。</div>
+        </div>
+        <div class="sp">
+          <div class="sp-icon">⚡</div>
+          <div class="sp-title">自動で公開される</div>
+          <div class="sp-desc">CI/CDが変換・デプロイを自動化。手動操作なしで管理サイトに反映される。</div>
+        </div>
+        <div class="sp">
+          <div class="sp-icon">📊</div>
+          <div class="sp-title">データで改善する</div>
+          <div class="sp-desc">閲覧数・解決率を毎月確認してコンテンツをアップデート。問い合わせ削減につなげる。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const staggerIn = (els, dir) => {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => {
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'none';
+          }, i * 90);
+        }
+      });
+    }, { threshold: 0.1 });
+    els.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = dir;
+      el.style.transition = 'opacity 0.4s, transform 0.4s';
+      obs.observe(el);
+    });
+  };
+  staggerIn(document.querySelectorAll('.step'), 'translateX(-20px)');
+  staggerIn(document.querySelectorAll('.flow-box'), 'translateY(20px)');
+  staggerIn(document.querySelectorAll('.kpi-card'), 'translateY(16px)');
+</script>
+
+</body>
+</html>
