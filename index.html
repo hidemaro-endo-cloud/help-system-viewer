@@ -5,54 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
   <meta name="googlebot" content="noindex, nofollow">
-  <title>FAQ & Manual 構築・更新の仕組み｜エンジニア相談用ドラフト</title>
+  <title>サポートヘルプの方向性｜ご意見ください</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Meiryo', sans-serif;
-      background: #F0F4FF;
-      color: #1E293B;
-      line-height: 1.65;
+      background: #F0F4FF; color: #1E293B; line-height: 1.7;
     }
     .hero {
       background: linear-gradient(135deg, #4F46E5 0%, #06B6D4 100%);
-      color: white;
-      padding: 52px 24px;
-      text-align: center;
+      color: white; padding: 56px 24px; text-align: center;
     }
-    .hero .tag {
-      display: inline-block;
-      background: rgba(255,255,255,0.2);
-      border-radius: 20px;
-      padding: 4px 16px;
-      font-size: 13px;
-      margin-bottom: 16px;
+    .hero .tag { display: inline-block; background: rgba(255,255,255,0.2); border-radius: 20px; padding: 4px 16px; font-size: 13px; margin-bottom: 18px; }
+    .hero h1 { font-size: clamp(22px, 4vw, 34px); font-weight: 700; margin-bottom: 14px; }
+    .hero p { font-size: 16px; opacity: 0.95; max-width: 640px; margin: 0 auto; }
+    .hero .cta-box {
+      display: inline-block; background: rgba(255,255,255,0.15); border: 1px dashed rgba(255,255,255,0.5);
+      border-radius: 12px; padding: 14px 22px; margin-top: 22px;
+      font-size: 14px;
     }
-    .hero h1 { font-size: clamp(20px, 3.8vw, 32px); font-weight: 700; margin-bottom: 12px; }
-    .hero p { font-size: 15px; opacity: 0.92; max-width: 620px; margin: 0 auto; }
-    .hero .meta { margin-top: 18px; font-size: 12px; opacity: 0.8; }
+    .container { max-width: 920px; margin: 0 auto; padding: 40px 20px 80px; }
 
-    .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px 80px; }
-
-    .toc {
-      background: white; border-radius: 16px; padding: 20px 24px;
-      margin-bottom: 36px; box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    .intro-card {
+      background: white; border-radius: 16px; padding: 24px 28px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06); margin-bottom: 40px;
+      border-left: 6px solid #4F46E5;
     }
-    .toc-title { font-size: 13px; font-weight: 700; color: #64748B; margin-bottom: 10px; letter-spacing: 0.1em; }
-    .toc-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 6px 18px; }
-    .toc-item { font-size: 13px; color: #4F46E5; text-decoration: none; padding: 4px 0; cursor: pointer; }
-    .toc-item:hover { text-decoration: underline; }
+    .intro-card h2 { font-size: 16px; color: #4F46E5; margin-bottom: 10px; }
+    .intro-card p { font-size: 14px; color: #475569; }
 
-    .section { margin-bottom: 56px; scroll-margin-top: 20px; }
+    .section { margin-bottom: 50px; }
     .section-title {
-      font-size: 20px; font-weight: 700; color: #4F46E5;
-      margin-bottom: 12px; padding-bottom: 8px;
+      font-size: 19px; font-weight: 700; color: #4F46E5;
+      margin-bottom: 8px; padding-bottom: 8px;
       border-bottom: 3px solid #4F46E5;
       display: flex; align-items: center; gap: 8px;
     }
     .section-sub { font-size: 13px; color: #64748B; margin-bottom: 18px; }
+    .ask {
+      display: inline-block; background: #FEF3C7; color: #92400E;
+      padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 700;
+      margin-left: 8px;
+    }
 
-    .flow { display: flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: 0; }
+    /* フロー */
+    .flow { display: flex; align-items: center; flex-wrap: wrap; justify-content: center; }
     .flow-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
     .flow-box {
       background: white; border-radius: 14px; padding: 18px 20px; text-align: center;
@@ -62,117 +59,98 @@
     }
     .flow-box:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(79,70,229,0.2); }
     .flow-box .icon { font-size: 30px; margin-bottom: 8px; display: block; }
-    .flow-box .label { font-size: 13px; font-weight: 700; color: #1E293B; }
+    .flow-box .label { font-size: 13px; font-weight: 700; }
     .flow-box .sublabel { font-size: 11px; color: #64748B; margin-top: 4px; }
     .flow-box.blue  { border-top: 4px solid #4F46E5; }
     .flow-box.cyan  { border-top: 4px solid #06B6D4; }
     .flow-box.amber { border-top: 4px solid #F59E0B; }
     .flow-box.green { border-top: 4px solid #10B981; }
-    .flow-box.purple{ border-top: 4px solid #8B5CF6; }
-    .arrow { font-size: 22px; color: #94A3B8; padding: 0 6px; flex-shrink: 0; }
-    .arrow-label { font-size: 11px; color: #64748B; text-align: center; max-width: 76px; }
+    .arrow { font-size: 22px; color: #94A3B8; padding: 0 6px; }
+    .arrow-label { font-size: 11px; color: #64748B; max-width: 70px; text-align: center; }
 
-    .template-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
-    .tpl-card {
-      background: white; border-radius: 14px; overflow: hidden;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08); border: 1px solid #E2E8F0;
-    }
-    .tpl-head { padding: 14px 20px; font-weight: 700; font-size: 16px; color: white; display: flex; align-items: center; gap: 8px; }
-    .tpl-head.faq    { background: #06B6D4; }
-    .tpl-head.manual { background: #1E3A8A; }
-    .tpl-field { padding: 12px 20px; border-bottom: 1px solid #F1F5F9; }
-    .tpl-field:last-child { border-bottom: none; }
-    .tpl-field-label { font-size: 13px; font-weight: 700; color: #1E293B; margin-bottom: 3px; }
-    .tpl-field-desc { font-size: 12px; color: #64748B; }
-    .tag-note {
-      background: #FEF3C7; border-left: 4px solid #F59E0B;
-      padding: 12px 16px; border-radius: 8px; margin-top: 16px;
-      font-size: 13px; color: #92400E;
-    }
-
-    .wireframe { background: white; border-radius: 14px; padding: 0; box-shadow: 0 4px 16px rgba(0,0,0,0.07); overflow: hidden; margin-bottom: 20px; }
-    .wire-bar {
-      background: #1E293B; color: #94A3B8; padding: 8px 16px;
-      font-size: 11px; font-family: 'Courier New', monospace;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .wire-bar .dot { width: 10px; height: 10px; border-radius: 50%; background: #475569; }
+    /* ワイヤー */
+    .wireframe { background: white; border-radius: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); overflow: hidden; margin-bottom: 18px; }
+    .wire-bar { background: #1E293B; color: #94A3B8; padding: 8px 16px; font-size: 11px; font-family: 'Courier New', monospace; display: flex; align-items: center; gap: 8px; }
+    .wire-bar .dot { width: 10px; height: 10px; border-radius: 50%; }
     .wire-bar .dot.r { background: #EF4444; }
     .wire-bar .dot.y { background: #F59E0B; }
     .wire-bar .dot.g { background: #10B981; }
     .wire-bar .url { margin-left: 12px; color: #A5F3FC; }
     .wire-body { padding: 22px; }
-
-    .wire-search { background: #F1F5F9; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #94A3B8; margin-bottom: 16px; }
-    .wire-h { font-size: 15px; font-weight: 700; color: #4F46E5; margin: 14px 0 8px; }
+    .wire-search { background: #F1F5F9; border-radius: 8px; padding: 12px 16px; font-size: 13px; color: #94A3B8; margin-bottom: 14px; }
+    .wire-h { font-size: 14px; font-weight: 700; color: #4F46E5; margin: 12px 0 6px; }
     .wire-list { font-size: 13px; color: #475569; list-style: none; padding-left: 0; }
-    .wire-list li { padding: 4px 0 4px 16px; position: relative; }
+    .wire-list li { padding: 3px 0 3px 16px; position: relative; }
     .wire-list li::before { content: '・'; position: absolute; left: 0; color: #94A3B8; }
-    .wire-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+    .wire-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
     .wire-tag { background: #EEF2FF; color: #4F46E5; font-size: 11px; padding: 3px 10px; border-radius: 12px; font-weight: 700; }
-    .wire-breadcrumb { font-size: 12px; color: #64748B; margin-bottom: 12px; }
-    .wire-h1 { font-size: 18px; font-weight: 700; color: #1E293B; margin-bottom: 12px; }
+    .wire-breadcrumb { font-size: 12px; color: #64748B; margin-bottom: 10px; }
+    .wire-h1 { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
     .wire-block { background: #F8FAFC; border-radius: 6px; padding: 12px 14px; margin: 8px 0; font-size: 13px; color: #475569; }
     .wire-block.q { background: #EEF2FF; border-left: 3px solid #4F46E5; }
     .wire-buttons { display: flex; gap: 8px; margin-top: 10px; }
-    .wire-btn { padding: 6px 16px; border-radius: 6px; font-size: 12px; font-weight: 700; border: 1px solid #CBD5E1; }
-    .wire-btn.y { background: #10B981; color: white; border-color: #10B981; }
-    .wire-btn.n { background: #EF4444; color: white; border-color: #EF4444; }
+    .wire-btn { padding: 6px 16px; border-radius: 6px; font-size: 12px; font-weight: 700; }
+    .wire-btn.y { background: #10B981; color: white; }
+    .wire-btn.n { background: #EF4444; color: white; }
     .wire-step { display: flex; gap: 12px; padding: 10px 0; border-top: 1px dashed #E2E8F0; }
     .wire-step:first-child { border-top: none; }
     .wire-step-num { width: 26px; height: 26px; border-radius: 50%; background: #06B6D4; color: white; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .wire-step-content { font-size: 13px; color: #475569; flex: 1; }
     .wire-step-content .ttl { font-weight: 700; color: #1E293B; margin-bottom: 2px; }
-    .wire-img-ph { background: #E2E8F0; border-radius: 4px; padding: 18px; text-align: center; font-size: 11px; color: #64748B; margin-top: 6px; }
+    .wire-img-ph { background: #E2E8F0; border-radius: 4px; padding: 16px; text-align: center; font-size: 11px; color: #64748B; margin-top: 6px; }
 
-    .code-block {
-      background: #1E293B; color: #A5F3FC; border-radius: 10px;
-      padding: 16px 20px; font-family: 'Courier New', monospace;
-      font-size: 12px; line-height: 1.7; overflow-x: auto; white-space: pre;
-    }
-    .code-block .k { color: #FBBF24; }
-    .code-block .s { color: #86EFAC; }
-    .code-block .c { color: #64748B; }
+    /* テンプレ */
+    .template-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .tpl-card { background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.08); border: 1px solid #E2E8F0; }
+    .tpl-head { padding: 14px 20px; font-weight: 700; font-size: 16px; color: white; }
+    .tpl-head.faq    { background: #06B6D4; }
+    .tpl-head.manual { background: #1E3A8A; }
+    .tpl-field { padding: 12px 20px; border-bottom: 1px solid #F1F5F9; }
+    .tpl-field:last-child { border-bottom: none; }
+    .tpl-field-label { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+    .tpl-field-desc { font-size: 12px; color: #64748B; }
 
-    .tag-flow { background: white; border-radius: 14px; padding: 22px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
-    .tag-center { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; margin: 16px 0; }
-    .alias-tag { background: #EEF2FF; color: #4F46E5; padding: 8px 18px; border-radius: 24px; font-size: 14px; font-weight: 700; border: 2px solid #4F46E5; }
-    .arrow-down { font-size: 22px; color: #06B6D4; text-align: center; margin: 8px 0; }
-    .target-page { background: linear-gradient(135deg, #06B6D4, #4F46E5); color: white; padding: 14px 24px; border-radius: 12px; font-size: 14px; font-weight: 700; text-align: center; }
-
-    .update-steps { display: flex; flex-direction: column; gap: 12px; }
+    /* CS運用 */
+    .ops-steps { display: flex; flex-direction: column; gap: 12px; }
     .step { display: flex; align-items: flex-start; gap: 16px; background: white; border-radius: 12px; padding: 16px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
     .step-num { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #4F46E5, #06B6D4); color: white; font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .step-content .title { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
     .step-content .desc { font-size: 13px; color: #64748B; }
 
-    .screen-mockup { background: white; border-radius: 14px; padding: 22px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
-    .mockup-bar { background: #F1F5F9; border-radius: 8px; padding: 10px 16px; font-size: 13px; font-weight: 700; color: #475569; display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-    .q-badge { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #4F46E5; color: white; border-radius: 50%; font-size: 13px; font-weight: 700; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(79,70,229,0.4); } 50% { box-shadow: 0 0 0 7px rgba(79,70,229,0); } }
-    .tooltip-demo { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 18px; }
-    .help-popup { background: #4F46E5; color: white; padding: 12px 16px; border-radius: 12px; font-size: 13px; position: relative; max-width: 240px; }
-    .help-popup::before { content: ''; position: absolute; left: -10px; top: 50%; transform: translateY(-50%); border: 6px solid transparent; border-right-color: #4F46E5; }
-
+    /* KPI */
     .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 16px; }
     .kpi-card { background: white; border-radius: 12px; padding: 18px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-bottom: 4px solid #4F46E5; }
     .kpi-card .kpi-icon  { font-size: 28px; margin-bottom: 8px; }
     .kpi-card .kpi-label { font-size: 13px; font-weight: 700; }
     .kpi-card .kpi-note  { font-size: 11px; color: #64748B; margin-top: 4px; }
 
-    .qa-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-    .qa-card { background: white; border-radius: 12px; padding: 18px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 4px solid #F59E0B; }
-    .qa-card-title { font-size: 14px; font-weight: 700; color: #B45309; margin-bottom: 10px; }
-    .qa-card ul { list-style: none; padding: 0; }
-    .qa-card li { font-size: 13px; color: #475569; padding: 4px 0 4px 18px; position: relative; }
-    .qa-card li::before { content: '□'; position: absolute; left: 0; color: #94A3B8; }
+    /* 意見ほしいポイント */
+    .feedback-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    .fb-card {
+      background: white; border-radius: 14px; padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border-top: 4px solid #F59E0B;
+      position: relative;
+    }
+    .fb-num {
+      position: absolute; top: -14px; left: 16px;
+      background: #F59E0B; color: white; font-weight: 700;
+      font-size: 13px; padding: 4px 12px; border-radius: 12px;
+    }
+    .fb-q { font-size: 15px; font-weight: 700; color: #1E293B; margin: 6px 0 10px; }
+    .fb-desc { font-size: 13px; color: #64748B; }
 
-    .url-table { width: 100%; border-collapse: collapse; }
-    .url-table th, .url-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #E2E8F0; font-size: 13px; vertical-align: top; }
-    .url-table th { background: #4F46E5; color: white; font-weight: 700; }
-    .url-table td.path { font-family: 'Courier New', monospace; color: #4F46E5; font-weight: 700; white-space: nowrap; }
+    /* CS視点ボックス */
+    .context-mockup { background: white; border-radius: 14px; padding: 22px; box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+    .mockup-bar { background: #F1F5F9; border-radius: 8px; padding: 10px 16px; font-size: 13px; font-weight: 700; color: #475569; display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .q-badge { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: #4F46E5; color: white; border-radius: 50%; font-size: 13px; font-weight: 700; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(79,70,229,0.4); } 50% { box-shadow: 0 0 0 7px rgba(79,70,229,0); } }
+    .tooltip-demo { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 16px; }
+    .help-popup { background: #4F46E5; color: white; padding: 12px 16px; border-radius: 12px; font-size: 13px; position: relative; max-width: 240px; }
+    .help-popup::before { content: ''; position: absolute; left: -10px; top: 50%; transform: translateY(-50%); border: 6px solid transparent; border-right-color: #4F46E5; }
 
-    .summary-card { background: linear-gradient(135deg,#4F46E5 0%,#06B6D4 100%); color:white; border-radius:20px; padding:32px; }
+    /* サマリー */
+    .summary-card { background: linear-gradient(135deg,#4F46E5,#06B6D4); color:white; border-radius:20px; padding:32px; }
     .summary-points { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:18px; margin-top:18px; }
     .sp { background:rgba(255,255,255,0.15); border-radius:12px; padding:16px; }
     .sp .sp-icon  { font-size:24px; margin-bottom:8px; }
@@ -182,370 +160,248 @@
     .note { background:#F0F4FF; border-radius:10px; padding:14px 16px; font-size:13px; color:#475569; margin-top:14px; }
     .note strong { color: #4F46E5; }
 
-    h3.sub-h { font-size:15px; color:#4F46E5; margin: 24px 0 10px; }
+    .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .scope-card { background: white; border-radius: 12px; padding: 18px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .scope-card.do  { border-left: 4px solid #10B981; }
+    .scope-card.no  { border-left: 4px solid #94A3B8; }
+    .scope-card h3 { font-size: 14px; margin-bottom: 10px; }
+    .scope-card.do h3 { color: #047857; }
+    .scope-card.no h3 { color: #64748B; }
+    .scope-card ul { list-style: none; padding: 0; }
+    .scope-card li { font-size: 13px; padding: 4px 0 4px 18px; position: relative; color: #475569; }
+    .scope-card.do li::before { content: '✓'; position: absolute; left: 0; color: #10B981; font-weight: 700; }
+    .scope-card.no li::before { content: '×'; position: absolute; left: 0; color: #94A3B8; font-weight: 700; }
 
     @media(max-width:700px){
       .flow { flex-direction:column; }
       .arrow { transform:rotate(90deg); }
-      .template-grid { grid-template-columns:1fr; }
+      .template-grid, .scope-grid { grid-template-columns:1fr; }
     }
   </style>
 </head>
 <body>
 
 <div class="hero">
-  <div class="tag">🛠️ BusCatch サポートナレッジ｜エンジニア相談用ドラフト</div>
-  <h1>FAQ & Manual の構築・更新の仕組み</h1>
-  <p>Markdownで書いて、Gitで管理して、自動で /help に公開。<br>本ドキュメントは Phase 2 でのリリースに向けたエンジニア相談用の仕様書です。</p>
-  <div class="meta">v1.1 ／ 作成：遠藤 ／ 関連：戦略サマリー1枚もの・運用ガイドライン</div>
+  <div class="tag">💬 ディスカッション用ドラフト</div>
+  <h1>サポートヘルプの方向性、これで進めて良さそうですか？</h1>
+  <p>顧客の問い合わせを減らすために、管理サイトに「ヘルプページ」を作りたいと考えています。<br>AIと整理してみた大枠を共有するので、方向性についてご意見いただけると嬉しいです。</p>
+  <div class="cta-box">📝 詳しい実装はエンジニアにお任せ／<strong>全体の枠組み</strong>を確認したいです</div>
 </div>
 
 <div class="container">
 
-  <div class="toc">
-    <div class="toc-title">📑 目次</div>
-    <div class="toc-list">
-      <a class="toc-item" href="#flow">1. 全体フロー</a>
-      <a class="toc-item" href="#sitemap">2. サイトマップ・URL設計</a>
-      <a class="toc-item" href="#wireframes">3. UI/UX ワイヤーフレーム</a>
-      <a class="toc-item" href="#templates">4. FAQ/Manual テンプレート</a>
-      <a class="toc-item" href="#frontmatter">5. データ構造（フロントマター）</a>
-      <a class="toc-item" href="#tags">6. タグ・キーワード設計</a>
-      <a class="toc-item" href="#search">7. 検索仕様</a>
-      <a class="toc-item" href="#context">8. コンテキストヘルプ</a>
-      <a class="toc-item" href="#update">9. 更新フロー</a>
-      <a class="toc-item" href="#kpi">10. 計測指標（KPI）</a>
-      <a class="toc-item" href="#consult">11. エンジニア相談事項</a>
-      <a class="toc-item" href="#summary">12. まとめ</a>
-    </div>
+  <div class="intro-card">
+    <h2>🎯 そもそも何をしたいか</h2>
+    <p>BusCatch を導入いただいた顧客から「使い方が分からない」「これってどう設定するの？」というお問い合わせが日々来ています。<br>
+    これらを <strong>管理サイト内のヘルプページ（FAQ + 操作手順書）で自己解決</strong> してもらえるようにしたい、というのが今回の取り組みです。</p>
   </div>
 
-  <!-- 1. 全体フロー -->
-  <div class="section" id="flow">
-    <div class="section-title">📡 1. 全体フロー</div>
-    <div class="section-sub">コンテンツが顧客の手元に届くまで、誰が何をするか</div>
-    <div style="background:white;border-radius:20px;padding:32px;box-shadow:0 4px 16px rgba(0,0,0,0.07);">
+  <!-- 1. 全体イメージ -->
+  <div class="section">
+    <div class="section-title">📡 全体イメージ <span class="ask">これで合っていそう？</span></div>
+    <div class="section-sub">コンテンツをCSが書いて、自動で管理サイトに公開される流れ</div>
+    <div style="background:white;border-radius:20px;padding:30px;box-shadow:0 4px 16px rgba(0,0,0,0.07);">
       <div class="flow">
         <div class="flow-item">
-          <div class="flow-box blue"><span class="icon">✏️</span><div class="label">CS担当が<br>Markdown作成</div><div class="sublabel">船井さん・遠藤が執筆</div></div>
+          <div class="flow-box blue"><span class="icon">✏️</span><div class="label">CS担当が<br>原稿を書く</div><div class="sublabel">船井さん・遠藤</div></div>
         </div>
-        <div class="flow-item"><div class="arrow">→</div><div class="arrow-label">git push</div></div>
+        <div class="flow-item"><div class="arrow">→</div></div>
         <div class="flow-item">
-          <div class="flow-box cyan"><span class="icon">🐙</span><div class="label">GitHub<br>リポジトリ</div><div class="sublabel">support-knowledge</div></div>
+          <div class="flow-box cyan"><span class="icon">🐙</span><div class="label">専用の<br>置き場所に保存</div><div class="sublabel">バージョン管理</div></div>
         </div>
-        <div class="flow-item"><div class="arrow">→</div><div class="arrow-label">自動ビルド</div></div>
+        <div class="flow-item"><div class="arrow">→</div></div>
         <div class="flow-item">
-          <div class="flow-box amber"><span class="icon">⚙️</span><div class="label">CI/CD<br>変換処理</div><div class="sublabel">MD→HTML＋索引</div></div>
+          <div class="flow-box amber"><span class="icon">⚙️</span><div class="label">自動で<br>ページに変換</div><div class="sublabel">手作業ゼロ</div></div>
         </div>
-        <div class="flow-item"><div class="arrow">→</div><div class="arrow-label">デプロイ</div></div>
+        <div class="flow-item"><div class="arrow">→</div></div>
         <div class="flow-item">
-          <div class="flow-box green"><span class="icon">🖥️</span><div class="label">管理サイト<br>/help</div><div class="sublabel">顧客が閲覧</div></div>
-        </div>
-        <div class="flow-item"><div class="arrow">→</div><div class="arrow-label">深リンク</div></div>
-        <div class="flow-item">
-          <div class="flow-box purple"><span class="icon">❓</span><div class="label">各機能画面の<br>？アイコン</div><div class="sublabel">文脈に合うヘルプへ</div></div>
+          <div class="flow-box green"><span class="icon">🖥️</span><div class="label">管理サイトの<br>/help に公開</div><div class="sublabel">顧客が閲覧</div></div>
         </div>
       </div>
-      <div class="note">💡 <strong>ポイント</strong>：CSがMarkdownを書いてGitにpushするだけ。変換・公開は自動。CMSへのログインもサーバー操作も不要。</div>
+      <div class="note">💡 <strong>イメージしているメリット</strong>：CMSの操作を覚えなくていい・更新履歴が残る・誤公開時は元に戻せる・無料で運用できる</div>
     </div>
   </div>
 
-  <!-- 2. サイトマップ -->
-  <div class="section" id="sitemap">
-    <div class="section-title">🗺️ 2. サイトマップ・URL設計</div>
-    <div class="section-sub">/help 配下に展開する想定のページ構成</div>
-    <div style="background:white;border-radius:14px;padding:20px;box-shadow:0 4px 16px rgba(0,0,0,0.07);overflow-x:auto;">
-      <table class="url-table">
-        <thead><tr><th>URL</th><th>ページ</th><th>役割</th></tr></thead>
-        <tbody>
-          <tr><td class="path">/help</td><td>トップ</td><td>検索＋人気FAQ＋タグ＋Manual一覧</td></tr>
-          <tr><td class="path">/help/faq</td><td>FAQ一覧</td><td>新着・人気順／タグ絞り込み</td></tr>
-          <tr><td class="path">/help/faq/{機能}/{slug}</td><td>FAQ詳細</td><td>1コンテンツ表示＋解決ボタン</td></tr>
-          <tr><td class="path">/help/manual</td><td>Manual一覧</td><td>機能別の手順書一覧</td></tr>
-          <tr><td class="path">/help/manual/{機能}/{slug}</td><td>Manual詳細</td><td>ステップごとの操作説明＋スクショ</td></tr>
-          <tr><td class="path">/help/search?q={keyword}</td><td>検索結果</td><td>全文検索＋ハイライト</td></tr>
-          <tr><td class="path">/help/tag/{機能}</td><td>タグ別一覧</td><td>機能別にFAQ/Manualをまとめて表示</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="note">⚠️ <strong>要相談</strong>：slug に日本語ファイル名を使うか英語に変換するか。SEO不要なら日本語スラッグでもOK。</div>
-  </div>
+  <!-- 2. ユーザーが見る画面 -->
+  <div class="section">
+    <div class="section-title">🎨 顧客が見る画面のイメージ <span class="ask">UXの方向性として違和感ない？</span></div>
+    <div class="section-sub">あくまでイメージ図。実際のデザインはエンジニア／デザイナーと作り込みます</div>
 
-  <!-- 3. ワイヤーフレーム -->
-  <div class="section" id="wireframes">
-    <div class="section-title">🎨 3. UI/UX ワイヤーフレーム</div>
-    <div class="section-sub">主要画面のレイアウトイメージ。Figma化はPhase 2 着手前に実施</div>
-
-    <h3 class="sub-h">3.1 /help トップページ</h3>
+    <p style="font-size:13px;color:#4F46E5;font-weight:700;margin-bottom:8px;">▼ ヘルプのトップ画面</p>
     <div class="wireframe">
       <div class="wire-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">/help</span></div>
       <div class="wire-body">
         <div class="wire-search">🔍 困っていることをキーワードで検索...</div>
         <div class="wire-h">🔥 よく見られているFAQ</div>
-        <ul class="wire-list">
-          <li>GPSが取得できないときは？</li>
-          <li>配車アプリでログインできない</li>
-          <li>送迎指示書が印刷できない</li>
-        </ul>
+        <ul class="wire-list"><li>GPSが取得できないときは？</li><li>配車アプリでログインできない</li><li>送迎指示書が印刷できない</li></ul>
         <div class="wire-h">🏷️ 機能から探す</div>
         <div class="wire-tags">
-          <span class="wire-tag">配車アプリ</span>
-          <span class="wire-tag">れんらくアプリ</span>
-          <span class="wire-tag">送迎指示書</span>
-          <span class="wire-tag">運行管理</span>
-          <span class="wire-tag">教習生管理</span>
+          <span class="wire-tag">配車アプリ</span><span class="wire-tag">れんらくアプリ</span><span class="wire-tag">送迎指示書</span><span class="wire-tag">運行管理</span>
         </div>
         <div class="wire-h">📖 Manual（手順書）</div>
-        <ul class="wire-list">
-          <li>配車アプリの初期設定</li>
-          <li>送迎ルートの登録手順</li>
-          <li>運行管理ダッシュボードの使い方</li>
-        </ul>
+        <ul class="wire-list"><li>配車アプリの初期設定</li><li>送迎ルートの登録手順</li></ul>
       </div>
     </div>
 
-    <h3 class="sub-h">3.2 FAQ詳細ページ</h3>
+    <p style="font-size:13px;color:#4F46E5;font-weight:700;margin:18px 0 8px;">▼ FAQの中身（個別ページ）</p>
     <div class="wireframe">
-      <div class="wire-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">/help/faq/配車アプリ/gps-not-found</span></div>
+      <div class="wire-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">/help/faq/...</span></div>
       <div class="wire-body">
         <div class="wire-breadcrumb">← ヘルプトップ ＞ 配車アプリ ＞ GPS取得不可</div>
         <div class="wire-h1">❓ GPSが取得できないときは？</div>
-        <div class="wire-block q"><strong>📌 要約回答（30字以内）</strong><br>位置情報の権限を「常に許可」に設定してください。</div>
-        <div class="wire-block"><strong>こんなとき…</strong><br>配車アプリを開いても現在地が表示されない／自車位置が動かない</div>
-        <div class="wire-block"><strong>確認すること</strong><br>1. 端末の設定 → 位置情報がONか<br>2. 配車アプリの権限が「常に許可」になっているか<br>3. 機内モードがOFFか</div>
+        <div class="wire-block q"><strong>📌 ズバリ答え（30字以内）</strong><br>位置情報の権限を「常に許可」に設定してください。</div>
+        <div class="wire-block"><strong>詳しい説明</strong><br>1. 端末の設定 → 位置情報がONか<br>2. 配車アプリの権限が「常に許可」か<br>3. 機内モードがOFFか</div>
         <hr style="border:none;border-top:1px dashed #CBD5E1;margin:14px 0;">
         <div style="font-size:13px;font-weight:700;">このFAQで解決しましたか？</div>
         <div class="wire-buttons"><span class="wire-btn y">✓ はい</span><span class="wire-btn n">✗ いいえ</span></div>
-        <div class="wire-h">🔗 関連</div>
-        <ul class="wire-list">
-          <li>配車アプリの初期設定（Manual）</li>
-          <li>GPS発信機の電池切れチェック（FAQ）</li>
-        </ul>
-      </div>
-    </div>
-
-    <h3 class="sub-h">3.3 Manual詳細ページ</h3>
-    <div class="wireframe">
-      <div class="wire-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="url">/help/manual/配車アプリ/initial-setup</span></div>
-      <div class="wire-body">
-        <div class="wire-breadcrumb">← ヘルプトップ ＞ 配車アプリ ＞ 初期設定</div>
-        <div class="wire-h1">📖 配車アプリの初期設定</div>
-        <div class="wire-block">
-          <strong>🎯 目的</strong>　はじめて配車アプリを使う担当者が、最短でログイン〜配車開始までできる<br>
-          <strong>🖥️ 対象画面</strong>　配車アプリ（タブレット）<br>
-          <strong>✅ 前提条件</strong>　管理者から発行されたアカウント情報・タブレット端末
-        </div>
-        <div class="wire-h">📋 手順</div>
-        <div class="wire-step">
-          <div class="wire-step-num">1</div>
-          <div class="wire-step-content">
-            <div class="ttl">アプリを起動してログイン画面を開く</div>
-            <div>App Storeから「BusCatch配車」をインストールしてタップ</div>
-            <div class="wire-img-ph">📷 ログイン画面のスクリーンショット</div>
-          </div>
-        </div>
-        <div class="wire-step">
-          <div class="wire-step-num">2</div>
-          <div class="wire-step-content">
-            <div class="ttl">アカウント情報を入力</div>
-            <div>管理者から共有された ID／パスワードを入力してログイン</div>
-            <div class="wire-img-ph">📷 入力フォームのスクリーンショット</div>
-          </div>
-        </div>
-        <div class="wire-step">
-          <div class="wire-step-num">3</div>
-          <div class="wire-step-content">
-            <div class="ttl">初回権限設定</div>
-            <div>位置情報・通知の許可ダイアログで「常に許可」を選択</div>
-          </div>
-        </div>
-        <div class="wire-h">⚠️ よくあるエラー</div>
-        <ul class="wire-list">
-          <li>「ID/PWが違います」→ 半角英数か確認、大文字小文字を確認</li>
-          <li>「位置情報が許可されていません」→ 設定アプリから手動許可</li>
-        </ul>
       </div>
     </div>
   </div>
 
-  <!-- 4. テンプレート -->
-  <div class="section" id="templates">
-    <div class="section-title">📋 4. FAQ / Manual テンプレート構造</div>
-    <div class="section-sub">全コンテンツはこのテンプレートに沿って執筆する（運用ガイドラインで規定）</div>
+  <!-- 3. FAQ と Manual の中身 -->
+  <div class="section">
+    <div class="section-title">📋 FAQ と Manual の中身 <span class="ask">この2種類で十分？</span></div>
+    <div class="section-sub">2つのテンプレートに沿って執筆する想定です</div>
     <div class="template-grid">
       <div class="tpl-card">
-        <div class="tpl-head faq">📄 FAQテンプレート</div>
-        <div class="tpl-field"><div class="tpl-field-label">▼ 質問</div><div class="tpl-field-desc">顧客の言葉そのままで（例：GPSが取れない？）</div></div>
-        <div class="tpl-field"><div class="tpl-field-label">▼ 要約回答（30字以内）</div><div class="tpl-field-desc">ズバリ答えを先に。一覧表示にも使う</div></div>
-        <div class="tpl-field"><div class="tpl-field-label">▼ 詳細</div><div class="tpl-field-desc">背景・手順・注意事項。スクショは任意</div></div>
-        <div class="tpl-field"><div class="tpl-field-label">▼ 関連Manual / 関連FAQ</div><div class="tpl-field-desc">横断参照リンク（ページ末尾に表示）</div></div>
-        <div class="tpl-field"><div class="tpl-field-label">▼ "解決した / しなかった" ボタン</div><div class="tpl-field-desc">効果測定の主KPI源（クリック数を集計）</div></div>
+        <div class="tpl-head faq">📄 FAQ（よくある質問）</div>
+        <div class="tpl-field"><div class="tpl-field-label">質問</div><div class="tpl-field-desc">顧客の言葉そのままで</div></div>
+        <div class="tpl-field"><div class="tpl-field-label">ズバリ答え（30字以内）</div><div class="tpl-field-desc">結論を先に</div></div>
+        <div class="tpl-field"><div class="tpl-field-label">詳しい説明</div><div class="tpl-field-desc">背景・手順・注意事項</div></div>
+        <div class="tpl-field"><div class="tpl-field-label">関連リンク</div><div class="tpl-field-desc">他のFAQ／Manualへの案内</div></div>
+        <div class="tpl-field"><div class="tpl-field-label">解決した／しなかったボタン</div><div class="tpl-field-desc">効果測定の主データ</div></div>
       </div>
       <div class="tpl-card">
-        <div class="tpl-head manual">📘 Manualテンプレート</div>
-        <div class="tpl-field"><div class="tpl-field-label">目的</div><div class="tpl-field-desc">このManualで何ができるようになるか</div></div>
-        <div class="tpl-field"><div class="tpl-field-label">対象画面</div><div class="tpl-field-desc">スクショで明示（配車アプリ／管理サイト等）</div></div>
-        <div class="tpl-field"><div class="tpl-field-label">前提条件</div><div class="tpl-field-desc">必要な設定・権限・端末など</div></div>
-        <div class="tpl-field"><div class="tpl-field-label">手順 1 〜 N（スクショ付き）</div><div class="tpl-field-desc">ステップごとに1枚のスクショ。番号と短いタイトル必須</div></div>
-        <div class="tpl-field"><div class="tpl-field-label">よくあるエラー</div><div class="tpl-field-desc">詰まるポイントと対処（最終セクション）</div></div>
+        <div class="tpl-head manual">📘 Manual（操作手順書）</div>
+        <div class="tpl-field"><div class="tpl-field-label">目的</div><div class="tpl-field-desc">これを読むと何ができるか</div></div>
+        <div class="tpl-field"><div class="tpl-field-label">対象画面</div><div class="tpl-field-desc">どのアプリ・どの画面か</div></div>
+        <div class="tpl-field"><div class="tpl-field-label">前提条件</div><div class="tpl-field-desc">必要な設定・権限など</div></div>
+        <div class="tpl-field"><div class="tpl-field-label">手順1〜N（スクショ付き）</div><div class="tpl-field-desc">ステップごとに1枚</div></div>
+        <div class="tpl-field"><div class="tpl-field-label">よくあるエラー</div><div class="tpl-field-desc">詰まるポイントと対処</div></div>
       </div>
     </div>
-    <div class="tag-note">
-      🏷️ <strong>タグ・キーワード設計</strong>：検索ヒット率を上げるため別名を相互リンク。<br>
-      例）「ロケータ」「車載器」「GPS発信機」をすべて同一ページに紐づける
-    </div>
+    <div class="note">💡 「ロケータ／車載器／GPS発信機」のような <strong>顧客ごとに違う呼び方</strong> は、同じページに紐付けて検索で全部ヒットするようにします。</div>
   </div>
 
-  <!-- 5. フロントマター -->
-  <div class="section" id="frontmatter">
-    <div class="section-title">📦 5. データ構造（フロントマター仕様）</div>
-    <div class="section-sub">各Markdownの先頭にYAMLでメタ情報を記載 → ビルド時にJSONへ変換し索引化</div>
-<div class="code-block"><span class="c"># 例：FAQの先頭フロントマター</span>
-<span class="k">---</span>
-<span class="k">title:</span> <span class="s">"GPSが取得できないときは？"</span>
-<span class="k">type:</span> <span class="s">faq</span>          <span class="c"># faq | manual</span>
-<span class="k">feature:</span> <span class="s">配車アプリ</span>     <span class="c"># 機能名（URLにも使用）</span>
-<span class="k">slug:</span> <span class="s">gps-not-found</span>
-<span class="k">summary:</span> <span class="s">"位置情報の権限を『常に許可』にしてください"</span>  <span class="c"># 30字以内</span>
-<span class="k">tags:</span>
-  - <span class="s">GPS</span>
-  - <span class="s">ロケータ</span>           <span class="c"># 別名タグ</span>
-  - <span class="s">車載器</span>             <span class="c"># 別名タグ</span>
-  - <span class="s">GPS発信機</span>         <span class="c"># 別名タグ</span>
-  - <span class="s">位置情報</span>
-<span class="k">related:</span>
-  - <span class="s">manual/配車アプリ/initial-setup</span>
-  - <span class="s">faq/配車アプリ/gps-battery</span>
-<span class="k">updated:</span> <span class="s">2026-05-28</span>
-<span class="k">author:</span> <span class="s">遠藤</span>
-<span class="k">---</span>
-
-<span class="c"># 本文（Markdown）...</span></div>
-    <div class="note">💡 <strong>用途</strong>：<strong>title/summary</strong>＝一覧表示／<strong>tags</strong>＝検索＆タグ別一覧／<strong>related</strong>＝関連リンク／<strong>updated</strong>＝鮮度表示</div>
-  </div>
-
-  <!-- 6. タグ -->
-  <div class="section" id="tags">
-    <div class="section-title">🏷️ 6. タグ・キーワード設計</div>
-    <div class="section-sub">「顧客が使う言葉」と「社内用語」のズレを別名タグで吸収する</div>
-    <div class="tag-flow">
-      <div style="font-size:13px;color:#475569;margin-bottom:10px;">顧客はそれぞれ違う言葉で検索する：</div>
-      <div class="tag-center">
-        <span class="alias-tag">ロケータ</span>
-        <span class="alias-tag">車載器</span>
-        <span class="alias-tag">GPS発信機</span>
-        <span class="alias-tag">位置情報装置</span>
-      </div>
-      <div class="arrow-down">↓ <span style="font-size:12px;color:#64748B;">同じタグセットで紐付け</span></div>
-      <div class="target-page">🎯 「GPS取得できない」FAQ ／ 「GPS発信機の設置」Manual</div>
-      <div class="note" style="margin-top:18px;">💡 <strong>運用ルール</strong>：新規執筆時、想定される<strong>顧客の呼び方を3つ以上タグに入れる</strong>。月次レビューで検索ワード分析→新しい別名を追加。</div>
-    </div>
-  </div>
-
-  <!-- 7. 検索仕様 -->
-  <div class="section" id="search">
-    <div class="section-title">🔍 7. 検索仕様</div>
-    <div class="section-sub">クライアント側全文検索で実装する想定（外部サービス不要）</div>
-    <div style="background:white;border-radius:14px;padding:22px;box-shadow:0 4px 16px rgba(0,0,0,0.07);overflow-x:auto;">
-      <table class="url-table">
-        <thead><tr><th>項目</th><th>仕様（案）</th></tr></thead>
-        <tbody>
-          <tr><td>対象</td><td>title / summary / tags / 本文</td></tr>
-          <tr><td>マッチング</td><td>部分一致（日本語形態素 or N-gram）</td></tr>
-          <tr><td>スコアリング</td><td>title一致 ＞ tags一致 ＞ 本文一致</td></tr>
-          <tr><td>並び順</td><td>関連度 → 更新日</td></tr>
-          <tr><td>ゼロ件時</td><td>「お問い合わせフォーム」誘導＋人気FAQ表示</td></tr>
-          <tr><td>候補ライブラリ</td><td>Lunr.js / FlexSearch（クライアント側）</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- 8. コンテキストヘルプ -->
-  <div class="section" id="context">
-    <div class="section-title">❓ 8. コンテキストヘルプ（？アイコン）</div>
-    <div class="section-sub">各機能画面に？ボタンを配置 → 該当FAQへ深リンク</div>
-    <div class="screen-mockup">
+  <!-- 4. ？アイコン -->
+  <div class="section">
+    <div class="section-title">❓ 各画面からヘルプへ飛べるようにしたい <span class="ask">配置イメージは妥当？</span></div>
+    <div class="section-sub">管理サイト内の各機能画面に「？」ボタンを置いて、迷ったときすぐ該当ヘルプに飛べる</div>
+    <div class="context-mockup">
       <div class="mockup-bar"><span>🚌 配車設定</span><span class="q-badge">?</span></div>
       <div style="background:#F8FAFC;border-radius:8px;padding:12px;font-size:13px;color:#94A3B8;">[配車設定の入力フォーム...]</div>
       <div class="tooltip-demo">
         <div style="font-size:13px;color:#475569;">？を押すと…</div>
-        <div style="font-size:24px;color:#F59E0B;">→</div>
-        <div class="help-popup">📌 <strong>配車設定のヘルプ</strong><br><span style="opacity:0.85;font-size:12px;">/help/faq/配車設定 へジャンプ</span></div>
+        <div style="font-size:22px;color:#F59E0B;">→</div>
+        <div class="help-popup">📌 <strong>配車設定のヘルプ</strong><br><span style="opacity:0.85;font-size:12px;">該当FAQへ直接ジャンプ</span></div>
       </div>
-      <div class="note" style="margin-top:18px;background:#FFF7ED;color:#92400E;border-left:4px solid #F59E0B;padding-left:14px;">
-        ⚠️ どの画面にどのFAQを紐付けるかは、船井さんへのヒアリング結果をもとに決定（船井さん確認リスト参照）。<br>
-        実装的には「画面ID → デフォルトジャンプ先URL」のマッピングテーブルが必要。
+      <div class="note" style="margin-top:16px;background:#FFF7ED;color:#92400E;border-left:4px solid #F59E0B;">
+        ⚠️ どの画面にどのFAQを紐付けるかは、船井さんの顧客目線ヒアリングで詰めていきます。
       </div>
     </div>
   </div>
 
-  <!-- 9. 更新フロー -->
-  <div class="section" id="update">
-    <div class="section-title">🔄 9. コンテンツ更新フロー</div>
-    <div class="section-sub">CS担当がコンテンツを追加・修正するときの手順</div>
-    <div class="update-steps">
-      <div class="step"><div class="step-num">1</div><div class="step-content"><div class="title">✏️ Markdownファイルを作る・編集する</div><div class="desc">テンプレートに沿ってフロントマター＋本文を記載。スクショは images/ に配置。</div></div></div>
-      <div class="step"><div class="step-num">2</div><div class="step-content"><div class="title">🐙 GitHubにpushする（mainブランチ or PR）</div><div class="desc">重要コンテンツはPR経由でレビュー。軽微な修正は直push可能とする想定。</div></div></div>
-      <div class="step"><div class="step-num">3</div><div class="step-content"><div class="title">⚙️ GitHub Actionsが自動でビルド</div><div class="desc">MarkdownをHTMLに変換 + 検索インデックス（JSON）を再生成。</div></div></div>
-      <div class="step"><div class="step-num">4</div><div class="step-content"><div class="title">🖥️ 管理サイト /help に反映</div><div class="desc">ビルド完了後、即時または短時間で公開。ロールバックは git revert で対応。</div></div></div>
-      <div class="step"><div class="step-num">5</div><div class="step-content"><div class="title">📊 計測データを月次レビュー</div><div class="desc">閲覧数・検索ワード・「解決した」率を確認し、改善優先順位を決める。</div></div></div>
+  <!-- 5. CSの運用 -->
+  <div class="section">
+    <div class="section-title">✏️ CSの運用イメージ <span class="ask">この負荷感で続けられそう？</span></div>
+    <div class="section-sub">原稿を書いて保存場所に置くだけ。CMSの操作習得は不要</div>
+    <div class="ops-steps">
+      <div class="step"><div class="step-num">1</div><div class="step-content"><div class="title">テンプレートに沿って原稿を書く</div><div class="desc">「質問・答え・詳細・関連」の枠を埋めるイメージ。スクショは画像フォルダに置く。</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><div class="title">保存場所にアップする</div><div class="desc">重要な変更はレビューを通す運用にすれば、誤公開リスクを抑えられる。</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><div class="title">自動でページが更新される</div><div class="desc">手動でHTMLを書いたり、デザインを整えたりは不要。</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><div class="title">月次でデータを見て改善する</div><div class="desc">よく検索されているワード／読まれてないFAQをチェックして優先順位をつける。</div></div></div>
     </div>
   </div>
 
-  <!-- 10. KPI -->
-  <div class="section" id="kpi">
-    <div class="section-title">📊 10. 計測指標（KPI）</div>
-    <div class="section-sub">エンジニアにイベント計測の実装をお願いしたい項目</div>
+  <!-- 6. スコープ -->
+  <div class="section">
+    <div class="section-title">🎯 やること／やらないこと <span class="ask">スコープこれで合ってる？</span></div>
+    <div class="section-sub">Phase 2（最初のリリース）の範囲。AI Bot等は来期検討</div>
+    <div class="scope-grid">
+      <div class="scope-card do">
+        <h3>✅ やる（Phase 2）</h3>
+        <ul>
+          <li>FAQ・Manual のページ作成</li>
+          <li>キーワード検索</li>
+          <li>機能別タグでの絞り込み</li>
+          <li>各画面からの？アイコン導線</li>
+          <li>「解決した／しなかった」ボタン</li>
+          <li>閲覧数・検索ワードの計測</li>
+        </ul>
+      </div>
+      <div class="scope-card no">
+        <h3>⏸ やらない（来期検討）</h3>
+        <ul>
+          <li>AI Bot・チャット機能</li>
+          <li>動画埋め込みプレイヤー</li>
+          <li>コメント・評価機能</li>
+          <li>多言語対応</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. 計測 -->
+  <div class="section">
+    <div class="section-title">📊 計測したいこと <span class="ask">この4つで足りる？</span></div>
+    <div class="section-sub">効果検証と改善優先順位づけに使うデータ</div>
     <div class="kpi-grid">
-      <div class="kpi-card"><div class="kpi-icon">👁️</div><div class="kpi-label">ページ閲覧数<br>（PV/UU）</div><div class="kpi-note">どのFAQが読まれているか</div></div>
+      <div class="kpi-card"><div class="kpi-icon">👁️</div><div class="kpi-label">ページ閲覧数</div><div class="kpi-note">どのFAQが読まれているか</div></div>
       <div class="kpi-card"><div class="kpi-icon">🔍</div><div class="kpi-label">検索ワード</div><div class="kpi-note">顧客が何を探しているか</div></div>
       <div class="kpi-card" style="border-bottom-color:#10B981;"><div class="kpi-icon">✅</div><div class="kpi-label">「解決した」率</div><div class="kpi-note">目標 50% 以上</div></div>
       <div class="kpi-card" style="border-bottom-color:#F59E0B;"><div class="kpi-icon">🔗</div><div class="kpi-label">流入元</div><div class="kpi-note">？アイコン経由 vs 直接</div></div>
     </div>
-    <div class="note">⚠️ <strong>要確認</strong>：既存の管理サイトでGA等の計測ツールが入っているか／流用可能か。</div>
   </div>
 
-  <!-- 11. 相談事項 -->
-  <div class="section" id="consult">
-    <div class="section-title">💬 11. エンジニアへの相談事項</div>
-    <div class="section-sub">相談MTG用のアジェンダ。各項目について方向性を握りたい</div>
-    <div class="qa-grid">
-      <div class="qa-card">
-        <div class="qa-card-title">🕐 工数・体制</div>
-        <ul><li>Phase 2（1ヶ月）でリリース可能か</li><li>担当者アサイン</li><li>既存スプリントとの兼ね合い</li></ul>
+  <!-- 8. 意見ほしいポイント -->
+  <div class="section">
+    <div class="section-title">💬 特にご意見いただきたいポイント</div>
+    <div class="section-sub">大枠の方向性について。実装の詳細はエンジニア相談で詰めます</div>
+    <div class="feedback-grid">
+      <div class="fb-card">
+        <div class="fb-num">Q1</div>
+        <div class="fb-q">この大枠で進めて問題なさそうですか？</div>
+        <div class="fb-desc">「FAQ＋Manual を /help に集約・各画面に？アイコン」という方向性そのもの</div>
       </div>
-      <div class="qa-card">
-        <div class="qa-card-title">🛠️ 技術選定</div>
-        <ul><li>既存FW／言語との整合性</li><li>Markdownリポジトリの管理場所（同梱／別repo）</li><li>CI/CDの構築可否（GitHub Actions想定）</li><li>検索ライブラリ（Lunr.js / FlexSearch）</li></ul>
+      <div class="fb-card">
+        <div class="fb-num">Q2</div>
+        <div class="fb-q">Phase 2 のスコープは妥当ですか？</div>
+        <div class="fb-desc">「やる／やらない」の線引きで、足したい／削りたいものはあるか</div>
       </div>
-      <div class="qa-card">
-        <div class="qa-card-title">♻️ 既存資産の活用</div>
-        <ul><li>計測ツール（GA等）の流用可否</li><li>認証基盤の引き継ぎ</li><li>既存デザインシステム／コンポーネント</li></ul>
+      <div class="fb-card">
+        <div class="fb-num">Q3</div>
+        <div class="fb-q">FAQとManualの2本立てで足りそうですか？</div>
+        <div class="fb-desc">他に必要なコンテンツの種類があれば（用語集・トラブルシューティング等）</div>
       </div>
-      <div class="qa-card">
-        <div class="qa-card-title">⚙️ 運用</div>
-        <ul><li>Markdown更新→本番反映までのリードタイム</li><li>ロールバック方法</li><li>画像配信のキャッシュ戦略</li><li>slug の日本語／英語ルール</li></ul>
+      <div class="fb-card">
+        <div class="fb-num">Q4</div>
+        <div class="fb-q">？アイコンの配置イメージは合っていますか？</div>
+        <div class="fb-desc">顧客目線で「ここで困りそう」な画面の優先順位</div>
       </div>
-      <div class="qa-card">
-        <div class="qa-card-title">🚨 リスク</div>
-        <ul><li>工数確保できない場合の代替案（Notion等）</li><li>部分リリース（FAQのみ／検索なし）の可否</li><li>セキュリティ要件（社外秘情報の混入防止）</li></ul>
+      <div class="fb-card">
+        <div class="fb-num">Q5</div>
+        <div class="fb-q">CSの運用負荷は無理なさそうですか？</div>
+        <div class="fb-desc">原稿を書く頻度・レビュー体制の現実性</div>
       </div>
-      <div class="qa-card">
-        <div class="qa-card-title">🎯 スコープ外（来期検討）</div>
-        <ul><li>AI bot／チャット機能</li><li>動画埋め込みプレイヤー</li><li>コメント・評価機能</li><li>多言語対応</li></ul>
+      <div class="fb-card">
+        <div class="fb-num">Q6</div>
+        <div class="fb-q">計測したいデータはこの4つで十分ですか？</div>
+        <div class="fb-desc">他に見ておきたい数字があれば</div>
       </div>
     </div>
   </div>
 
-  <!-- 12. まとめ -->
-  <div class="section" id="summary">
+  <!-- まとめ -->
+  <div class="section">
     <div class="summary-card">
-      <div style="font-size:19px;font-weight:700;margin-bottom:6px;">📌 まとめ：エンジニアに握りたい3つのこと</div>
+      <div style="font-size:19px;font-weight:700;margin-bottom:8px;">📌 まとめ：方向性のコア</div>
       <div class="summary-points">
-        <div class="sp"><div class="sp-icon">📝</div><div class="sp-title">Markdown + Git で運用</div><div class="sp-desc">CSがMarkdownを書いてpushするだけ。CMS不要・運用負荷を最小化</div></div>
-        <div class="sp"><div class="sp-icon">⚡</div><div class="sp-title">/help を1ヶ月で形にする</div><div class="sp-desc">FAQ・Manual・検索・？アイコン・解決ボタンを Phase 2 でリリース</div></div>
-        <div class="sp"><div class="sp-icon">📊</div><div class="sp-title">計測込みで作る</div><div class="sp-desc">PV／検索ワード／解決率／流入元を最初から測れる設計に</div></div>
+        <div class="sp"><div class="sp-icon">🎯</div><div class="sp-title">問い合わせを減らす</div><div class="sp-desc">顧客が自己解決できる /help を Phase 2 で立ち上げ</div></div>
+        <div class="sp"><div class="sp-icon">📝</div><div class="sp-title">CSが書いて自動公開</div><div class="sp-desc">CMSなし。テンプレに沿って書くだけで運用が回る</div></div>
+        <div class="sp"><div class="sp-icon">📊</div><div class="sp-title">データで改善し続ける</div><div class="sp-desc">閲覧・検索・解決率を見て、月次でコンテンツ強化</div></div>
+      </div>
+      <div style="margin-top:24px;padding:16px;background:rgba(255,255,255,0.15);border-radius:12px;font-size:14px;text-align:center;">
+        💬 この方向性で進めて良さそうか、お気軽にコメントください
       </div>
     </div>
   </div>
@@ -557,16 +413,12 @@
     const obs = new IntersectionObserver(entries => {
       entries.forEach((e, i) => {
         if (e.isIntersecting) {
-          setTimeout(() => {
-            e.target.style.opacity = '1';
-            e.target.style.transform = 'none';
-          }, i * 60);
+          setTimeout(() => { e.target.style.opacity = '1'; e.target.style.transform = 'none'; }, i * 60);
         }
       });
     }, { threshold: 0.1 });
     els.forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = dir;
+      el.style.opacity = '0'; el.style.transform = dir;
       el.style.transition = 'opacity 0.4s, transform 0.4s';
       obs.observe(el);
     });
@@ -575,15 +427,8 @@
   staggerIn(document.querySelectorAll('.flow-box'), 'translateY(20px)');
   staggerIn(document.querySelectorAll('.kpi-card'), 'translateY(16px)');
   staggerIn(document.querySelectorAll('.tpl-card'), 'translateY(16px)');
-  staggerIn(document.querySelectorAll('.qa-card'), 'translateY(16px)');
-
-  document.querySelectorAll('.toc-item').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) target.scrollIntoView({ behavior: 'smooth' });
-    });
-  });
+  staggerIn(document.querySelectorAll('.fb-card'), 'translateY(16px)');
+  staggerIn(document.querySelectorAll('.scope-card'), 'translateY(16px)');
 </script>
 
 </body>
